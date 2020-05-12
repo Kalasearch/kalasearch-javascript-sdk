@@ -1,0 +1,41 @@
+{
+  "name": "kalasearch-javascript-sdk",
+  "version": "1.0.0",
+  "description": "Kala Search javascript sdk",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version" : "npm run format && git add -A src",
+    "postversion" : "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalasearch/kalasearch-javascript-sdk.git"
+  },
+  "keywords": ["Kala","Search"],
+  "author": "Chrystal Lyu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kalasearch/kalasearch-javascript-sdk/issues"
+  },
+  "homepage": "https://github.com/Kalasearch/kalasearch-javascript-sdk#readme",
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5",
+    "ts-jest": "^25.5.1",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.9.2"
+  },
+  "files": [
+    "lib/**/*"
+  ]
+}
