@@ -9,17 +9,20 @@
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm test && npm run lint",
-    "preversion" : "npm run lint",
-    "version" : "npm run format && git add -A src",
-    "postversion" : "git push && git push --tags"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kalasearch/kalasearch-javascript-sdk.git"
   },
-  "keywords": ["Kala","Search"],
+  "keywords": [
+    "Kala",
+    "Search"
+  ],
   "author": "Chrystal Lyu",
   "license": "ISC",
   "bugs": {
@@ -37,5 +40,8 @@
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
 }
