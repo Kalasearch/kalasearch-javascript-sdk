@@ -1,6 +1,10 @@
 'use strict';
 
-import instance, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import instance, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 import * as Types from './types';
 
 class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
@@ -33,10 +37,37 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
     });
   }
 
-  async post(url: string, data?: any, config?: AxiosRequestConfig): Promise<any> {
+  async get<T = any, R = AxiosResponse<T>>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<R> {
+    try {
+      return await this.instance.get(url, config);
+    } catch (e) {
+      throw new e();
+    }
+  }
+
+  async post(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<any> {
     try {
       return await this.instance.post(url, data, config);
     } catch (e) {
+      throw new e();
+    }
+  }
+
+  async put<T = any, R = AxiosResponse<T>>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<R> {
+    try {
+      return await this.instance.put(url, data, config);
+    } catch(e) {
       throw new e();
     }
   }

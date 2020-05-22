@@ -1,4 +1,7 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios'
 
 export interface Config {
   host: string;
@@ -22,10 +25,60 @@ export interface SearchResponse {
   queryTimeUsed: number;
 }
 
+export interface CreateIndexRequest {
+  indexName: string;
+}
+
+export interface IndexRequest {
+  indexId: string;
+}
+
+export interface IndexResponse {
+  indexId: string;
+  indexName: string;
+  highlightFields: object[];
+  searchableFields: object[];
+  appId: string;
+  rankers: object[];
+  createdAt: any;
+  updatedAt: any;
+  numericFields: object[];
+}
+
 export interface IndexInterface extends KalaAxiosWrapperInterface {
-  search(query: string, indexId: string, options?: SearchParams): Promise<SearchResponse>;
+  search(
+    query: string,
+    indexId: string,
+    options?: SearchParams
+  ): Promise<SearchResponse>;
+  getIndex(
+    indexId: string,
+  ): Promise<IndexResponse>;
+  getIndexList(): Promise<IndexResponse[]>;
+  createIndex(
+    indexName: string
+  ): Promise<IndexResponse>;
+  // updateIndex(
+  //   indexId: string,
+  //   indexDetail: IndexResponse
+  // ): Promise<IndexResponse>;
 }
 
 export interface KalaAxiosWrapperInterface {
-  post<T = any, R = AxiosResponse<any>>(url: string, data?: T, config?: AxiosRequestConfig): Promise<R>;
+  get<T = any, R = AxiosResponse<T>>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<R>;
+
+  post<T = any, R = AxiosResponse<any>>(
+    url: string,
+    data?: T,
+    config?: AxiosRequestConfig
+  ): Promise<R>;
+
+  put<T = any, R = AxiosResponse<T>>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<R>;
 }
