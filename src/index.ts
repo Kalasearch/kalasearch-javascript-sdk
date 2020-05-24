@@ -3,7 +3,7 @@ import * as Types from './types';
 
 class Index extends KalaAxiosWrapper implements Types.IndexInterface {
 
-  constructor(config: Types.Config, indexId: string) {
+  constructor(config: Types.Config) {
     super(config);
   }
 
@@ -31,17 +31,18 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
 
   async createIndex(indexName: string): Promise<Types.IndexResponse> {
     const url = `/indexes`;
-    const params = {
-      indexName
-    }
-    return await this.post(url, params)
+    return await this.post(url, { indexName })
   }
 
-  // async updateIndex(indexId: string, indexDetail: Types.IndexResponse): Promise<Types.IndexResponse> {
-  //   const url = `/indexes/${indexId}`;
-  //   const params = JSON.stringify(indexDetail);
-  //   return await this.put(url, JSON.stringify(indexDetail))
-  // }
+  async updateIndex(indexId: string, indexDetail: Types.IndexResponse): Promise<Types.IndexResponse> {
+    const url = `/indexes/${indexId}`;
+    return await this.put(url, indexDetail)
+  }
+
+  async addDocument(indexId: string, documents: Types.Document[]): Promise<Types.DocumentResponse> {
+    const url = `/indexes/${indexId}/docs`
+    return await this.post(url, documents)
+  }
 }
 
-export { Index };
+export { Index as KalaSearch };

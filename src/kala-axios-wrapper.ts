@@ -13,7 +13,7 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
   constructor(config: Types.Config) {
     if (config.apiKey !== undefined && config.appId !== undefined) {
       this.instance = instance.create({
-        baseURL: config.host,
+        baseURL: 'https://api.kalasearch.cn',
         headers: {
           'Content-Type': 'application/json',
           appId: config.appId,
@@ -22,9 +22,9 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
       });
     } else {
       this.instance = instance.create({
-        baseURL: config.host,
+        baseURL: 'https://api.kalasearch.cn',
       });
-    }
+    };
     this.instance.interceptors.response.use((response) => response.data);
     this.instance.interceptors.request.use((request) => {
       if (request.data !== undefined) {
@@ -44,7 +44,7 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
     try {
       return await this.instance.get(url, config);
     } catch (e) {
-      throw new e();
+      return e.response;
     }
   }
 
@@ -56,7 +56,7 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
     try {
       return await this.instance.post(url, data, config);
     } catch (e) {
-      throw new e();
+      return e.response;
     }
   }
 
@@ -68,7 +68,7 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
     try {
       return await this.instance.put(url, data, config);
     } catch(e) {
-      throw new e();
+      return e.response;
     }
   }
 }

@@ -4,7 +4,6 @@ import {
 } from 'axios'
 
 export interface Config {
-  host: string;
   appId: string;
   apiKey: string;
 }
@@ -45,6 +44,14 @@ export interface IndexResponse {
   numericFields: object[];
 }
 
+export interface Document<T = any> {
+  [attribute: string]: T
+}
+
+export interface DocumentResponse {
+  _id: string
+}
+
 export interface IndexInterface extends KalaAxiosWrapperInterface {
   search(
     query: string,
@@ -58,10 +65,14 @@ export interface IndexInterface extends KalaAxiosWrapperInterface {
   createIndex(
     indexName: string
   ): Promise<IndexResponse>;
-  // updateIndex(
-  //   indexId: string,
-  //   indexDetail: IndexResponse
-  // ): Promise<IndexResponse>;
+  updateIndex(
+    indexId: string,
+    indexDetail: IndexResponse,
+  ): Promise<IndexResponse>;
+  addDocument(
+    indexId: string,
+    documents: Document[],
+  ): Promise<DocumentResponse>;
 }
 
 export interface KalaAxiosWrapperInterface {
