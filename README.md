@@ -3,10 +3,11 @@
 **KalaSearch JavaScript** is a client for **KalaSearch** written in JavaScript. **KalaSearch** is a powerful, fast, open-source, easy to use and deploy search engine. Both searching and indexing are highly customizable.
 
 ## 🔧 Installation
+Installing with npm:
 ```sh
 npm install kalasearch-javascript-sdk
 ```
-
+Installing with yarn:
 ```sh
 yarn add kalasearch-javascript-sdk
 ```
@@ -40,11 +41,11 @@ Output:
   "hits": [
     {
       "_id": "bxhrKnIBUGhMMzxQmktg",
-      "_source": { name: "bill" }
+      "_source": { "name": "bill" }
     }
     {
       "_id": "lp8gLnIB2RA_SQyqB57i",
-      "_source": { name: "bill gates" }
+      "_source": { "name": "bill gates" }
     }
   ],
   "queryTimeUsed": 1,
@@ -54,3 +55,4 @@ Output:
 ```
 
 ## 🎬 Examples
+
