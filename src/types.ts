@@ -1,4 +1,5 @@
 import {
+  AxiosError,
   AxiosRequestConfig,
   AxiosResponse
 } from 'axios'
@@ -93,3 +94,32 @@ export interface KalaAxiosWrapperInterface {
     config?: AxiosRequestConfig
   ): Promise<R>;
 }
+
+/*
+ ** ERROR HANDLER
+ */
+
+export interface KalaSearchApiErrorInterface extends Error {
+  name: string
+  message: string
+}
+
+export interface KalaSearchApiErrorResponse {
+  status?: number
+  statusText?: string
+  path?: string
+  method?: string
+  body?: object
+}
+
+export interface KalaSearchApiErrorRequest {
+  url?: string
+  path?: string
+  method?: string
+}
+
+export type KalaSearchApiErrorConstructor = new (
+  error: AxiosError
+) => void
+
+export default KalaSearch
