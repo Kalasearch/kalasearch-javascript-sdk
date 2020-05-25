@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/Kalasearch/kalasearch-javascript-sdk#readme",
   "devDependencies": {
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^25.2.3",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
     "ts-jest": "^25.5.1",
