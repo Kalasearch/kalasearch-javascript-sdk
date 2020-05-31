@@ -1,14 +1,15 @@
-'use strict';
+'use strict'
 
 import instance, {
   AxiosInstance,
   AxiosRequestConfig,
   AxiosResponse
-} from 'axios';
-import * as Types from './types';
+} from 'axios'
+import KalaSearchApiError from './kalasearch-error'
+import * as Types from './types'
 
 class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
-  instance: AxiosInstance;
+  instance: AxiosInstance
 
   constructor(config: Types.Config) {
     if (config.apiKey !== undefined && config.appId !== undefined) {
@@ -19,22 +20,22 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
           appId: config.appId,
           apiKey: config.apiKey,
         },
-      });
+      })
     } else {
       this.instance = instance.create({
         baseURL: 'https://api.kalasearch.cn',
-      });
-    };
-    this.instance.interceptors.response.use((response) => response.data);
+      })
+    }
+    this.instance.interceptors.response.use((response) => response.data)
     this.instance.interceptors.request.use((request) => {
       if (request.data !== undefined) {
         return {
           ...request,
           data: JSON.stringify(request.data),
-        };
+        }
       }
-      return request;
-    });
+      return request
+    })
   }
 
   async get<T = any, R = AxiosResponse<T>>(
@@ -42,9 +43,9 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
     config?: AxiosRequestConfig
   ): Promise<R> {
     try {
-      return await this.instance.get(url, config);
+      return await this.instance.get(url, config)
     } catch (e) {
-      return e.response;
+      throw new KalaSearchApiError(e)
     }
   }
 
@@ -54,9 +55,9 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
     config?: AxiosRequestConfig
   ): Promise<any> {
     try {
-      return await this.instance.post(url, data, config);
+      return await this.instance.post(url, data, config)
     } catch (e) {
-      return e.response;
+      throw new KalaSearchApiError(e)
     }
   }
 
@@ -66,11 +67,11 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
     config?: AxiosRequestConfig
   ): Promise<R> {
     try {
-      return await this.instance.put(url, data, config);
+      return await this.instance.put(url, data, config)
     } catch(e) {
-      return e.response;
+      throw new KalaSearchApiError(e)
     }
   }
 }
 
-export default KalaAxiosWrapper;
+export default KalaAxiosWrapper
