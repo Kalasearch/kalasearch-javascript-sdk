@@ -6,7 +6,7 @@ const KalaSearchApiError: Types.KalaSearchApiErrorConstructor = class
   implements Types.KalaSearchApiErrorInterface {
     response?: Types.KalaSearchApiErrorResponse
     request?: Types.KalaSearchApiErrorRequest
-    type: String
+    type: string
 
     constructor(error: AxiosError) {
       super(error.message)
