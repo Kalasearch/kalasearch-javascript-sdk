@@ -13,13 +13,13 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
 
   async search(
       query: string,
-      hitsPerpage: number,
+      hitsPerPage: number,
       searchableFields: string[]
     ): Promise<Types.SearchResponse> {
     const url = `/indexes/${this.indexId}/docs/search`
     const params: Types.SearchRequest = {
       query,
-      hitsPerpage,
+      hitsPerPage,
       searchableFields
     }
     return await this.post(

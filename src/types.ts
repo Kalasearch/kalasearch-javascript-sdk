@@ -18,7 +18,7 @@ export interface Config {
 
 export interface SearchRequest {
   query: string;
-  hitsPerpage?: number;
+  hitsPerPage?: number;
   searchableFields?: string[];
 }
 
@@ -70,7 +70,7 @@ export interface KalaSearchInterface extends KalaAxiosWrapper {
 export interface IndexInterface extends KalaAxiosWrapperInterface {
   search(
     query: string,
-    hitsPerpage?: number,
+    hitsPerPage?: number,
     searchableFields?: string[]
   ): Promise<SearchResponse>;
   updateIndex(
