@@ -2,8 +2,8 @@
   "name": "kalasearch-javascript-sdk",
   "version": "1.0.1",
   "description": "Kala Search javascript sdk",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./lib/kalasearch.js",
+  "types": "./lib/types.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc",

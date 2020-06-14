@@ -1,48 +1,46 @@
-import KalaAxiosWrapper from './kala-axios-wrapper';
-import * as Types from './types';
+'use strict'
+
+import KalaAxiosWrapper from './kala-axios-wrapper'
+import * as Types from './types'
 
 class Index extends KalaAxiosWrapper implements Types.IndexInterface {
+  indexId: string
 
-  constructor(config: Types.Config) {
-    super(config);
+  constructor(config: Types.Config, indexId: string) {
+    super(config)
+    this.indexId = indexId
   }
 
-  async search(query: string, indexId: string): Promise<Types.SearchResponse> {
-    const url = `/indexes/${indexId}/docs/search`;
+  async search(
+      query: string,
+      hitsPerpage: number,
+      searchableFields: string[]
+    ): Promise<Types.SearchResponse> {
+    const url = `/indexes/${this.indexId}/docs/search`
     const params: Types.SearchRequest = {
       query,
-      indexId
-    };
+      hitsPerpage,
+      searchableFields
+    }
     return await this.post(
       url, 
       params
-    );
+    )
   }
 
-  async getIndex(indexId: string): Promise<Types.IndexResponse> {
-    const url = `/indexes/${indexId}`;
-    return await this.get(url);
-  }
-
-  async getIndexList(): Promise<Types.IndexResponse[]> {
-    const url = `/indexes`;
-    return await this.get(url);
-  }
-
-  async createIndex(indexName: string): Promise<Types.IndexResponse> {
-    const url = `/indexes`;
-    return await this.post(url, { indexName })
-  }
-
-  async updateIndex(indexId: string, indexDetail: Types.IndexResponse): Promise<Types.IndexResponse> {
-    const url = `/indexes/${indexId}`;
+  async updateIndex(
+      indexDetail: Types.IndexResponse
+    ): Promise<Types.IndexResponse> {
+    const url = `/indexes/${this.indexId}`;
     return await this.put(url, indexDetail)
   }
 
-  async addDocument(indexId: string, documents: Types.Document[]): Promise<Types.DocumentResponse> {
-    const url = `/indexes/${indexId}/docs`
+  async addDocument(
+    documents: Types.Document[]
+    ): Promise<Types.DocumentResponse> {
+    const url = `/indexes/${this.indexId}/docs`
     return await this.post(url, documents)
   }
 }
 
-export { Index as KalaSearch };
+export { Index }

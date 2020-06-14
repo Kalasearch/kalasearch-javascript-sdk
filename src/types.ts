@@ -1,22 +1,25 @@
 import {
   AxiosError,
+  AxiosInstance,
   AxiosRequestConfig,
   AxiosResponse
 } from 'axios'
+import { Index } from './index'
+import KalaAxiosWrapper from './kala-axios-wrapper'
+import KalaSearch from './kalasearch'
+import KalaSearchApiError from './kalasearch-error'
+export { Index }
+export { KalaSearchApiError }
 
 export interface Config {
   appId: string;
   apiKey: string;
 }
 
-export interface SearchParams {
-  searchableFields?: string[];
-}
-
 export interface SearchRequest {
   query: string;
-  indexId: string;
-  options?: SearchParams;
+  hitsPerpage?: number;
+  searchableFields?: string[];
 }
 
 export interface SearchResponse {
@@ -53,30 +56,33 @@ export interface DocumentResponse {
   _id: string
 }
 
-export interface IndexInterface extends KalaAxiosWrapperInterface {
-  search(
-    query: string,
-    indexId: string,
-    options?: SearchParams
-  ): Promise<SearchResponse>;
-  getIndex(
-    indexId: string,
-  ): Promise<IndexResponse>;
+export interface KalaSearchInterface extends KalaAxiosWrapper {
+  config: Config;
+  getIndex: (
+    indexUid: string
+  ) => Index;
   getIndexList(): Promise<IndexResponse[]>;
   createIndex(
     indexName: string
   ): Promise<IndexResponse>;
+}
+
+export interface IndexInterface extends KalaAxiosWrapperInterface {
+  search(
+    query: string,
+    hitsPerpage?: number,
+    searchableFields?: string[]
+  ): Promise<SearchResponse>;
   updateIndex(
-    indexId: string,
     indexDetail: IndexResponse,
   ): Promise<IndexResponse>;
   addDocument(
-    indexId: string,
     documents: Document[],
   ): Promise<DocumentResponse>;
 }
 
 export interface KalaAxiosWrapperInterface {
+  instance: AxiosInstance;
   get<T = any, R = AxiosResponse<T>>(
     url: string,
     config?: AxiosRequestConfig
