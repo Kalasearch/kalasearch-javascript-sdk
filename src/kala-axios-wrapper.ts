@@ -17,8 +17,8 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
         baseURL: 'https://api.kalasearch.cn',
         headers: {
           'Content-Type': 'application/json',
-          appId: config.appId,
-          apiKey: config.apiKey,
+          'X-Kalasearch-Id': config.appId,
+          'X-Kalasearch-Key': config.apiKey,
         },
       })
     } else {

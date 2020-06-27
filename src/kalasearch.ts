@@ -13,9 +13,9 @@ class Kalasearch extends KalaAxiosWrapper
     }
 
     getIndex(
-        indexId: string
+        id: string
       ): Index {
-      return new Index(this.config, indexId)
+      return new Index(this.config, id)
     }
   
     async getIndexList(): Promise<Types.IndexResponse[]> {

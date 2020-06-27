@@ -37,7 +37,7 @@ export interface IndexRequest {
 }
 
 export interface IndexResponse {
-  indexId: string;
+  id: string;
   indexName: string;
   highlightFields: object[];
   searchableFields: object[];
@@ -59,7 +59,7 @@ export interface DocumentResponse {
 export interface KalaSearchInterface extends KalaAxiosWrapper {
   config: Config;
   getIndex: (
-    indexUid: string
+    id: string
   ) => Index;
   getIndexList(): Promise<IndexResponse[]>;
   createIndex(
