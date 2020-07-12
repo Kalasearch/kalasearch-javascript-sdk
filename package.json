@@ -1,6 +1,6 @@
 {
   "name": "kalasearch-javascript-sdk",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Kala Search javascript sdk",
   "main": "./lib/kalasearch.js",
   "types": "./lib/types.d.ts",
