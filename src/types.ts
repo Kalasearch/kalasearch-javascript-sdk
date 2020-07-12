@@ -20,6 +20,7 @@ export interface SearchRequest {
   query: string;
   hitsPerPage?: number;
   searchableFields?: string[];
+  highlightFields?: string[];
 }
 
 export interface SearchResponse {
@@ -71,7 +72,8 @@ export interface IndexInterface extends KalaAxiosWrapperInterface {
   search(
     query: string,
     hitsPerPage?: number,
-    searchableFields?: string[]
+    searchableFields?: string[],
+    highlightFields?: string[]
   ): Promise<SearchResponse>;
   updateIndex(
     indexDetail: IndexResponse,
