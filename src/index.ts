@@ -15,7 +15,7 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
       query: string,
       options?: Types.SearchParams
     ): Promise<Types.SearchResponse> {
-    const url = `/indexes/${this.id}/query`
+    const url = `/v1/indexes/${this.id}/query`
     const params: Types.SearchRequest = {
       query,
     }
@@ -39,14 +39,14 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
   async updateIndex(
       indexDetail: Types.IndexResponse
     ): Promise<Types.IndexResponse> {
-    const url = `/indexes/${this.id}`;
+    const url = `/v1/indexes/${this.id}`;
     return await this.put(url, indexDetail)
   }
 
   async addDocument(
     documents: Types.Document[]
     ): Promise<Types.DocumentResponse> {
-    const url = `/indexes/${this.id}/docs`
+    const url = `/v1/indexes/${this.id}/docs`
     return await this.post(url, documents)
   }
 }

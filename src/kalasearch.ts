@@ -18,15 +18,15 @@ class Kalasearch extends KalaAxiosWrapper
       return new Index(this.config, id)
     }
   
-    async getIndexList(): Promise<Types.IndexResponse[]> {
-      const url = `/indexes`
+    async getIndexList(): Promise<Types.IndexListResponse[]> {
+      const url = `/v1/indexes`
       return await this.get(url)
     }
   
     async createIndex(
         indexName: string
       ): Promise<Types.IndexResponse> {
-      const url = `/indexes`
+      const url = `/v1/indexes`
       return await this.post(url, { indexName })
     }
   }

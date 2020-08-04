@@ -55,6 +55,10 @@ export interface IndexResponse {
   numericFields: object[];
 }
 
+export interface IndexListResponse {
+  indexes: object[];
+}
+
 export interface Document<T = any> {
   [attribute: string]: T
 }
@@ -68,7 +72,7 @@ export interface KalaSearchInterface extends KalaAxiosWrapper {
   getIndex: (
     id: string
   ) => Index;
-  getIndexList(): Promise<IndexResponse[]>;
+  getIndexList(): Promise<IndexListResponse[]>;
   createIndex(
     indexName: string
   ): Promise<IndexResponse>;
