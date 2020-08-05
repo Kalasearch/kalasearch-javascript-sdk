@@ -12,9 +12,15 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
   instance: AxiosInstance
 
   constructor(config: Types.Config) {
+    let KALA_BASE_URL;
+    if (config.baseUrl !== undefined) {
+      KALA_BASE_URL = config.baseUrl
+    } else {
+      KALA_BASE_URL = 'https://api.kalasearch.cn'
+    }
     if (config.apiKey !== undefined && config.appId !== undefined) {
       this.instance = instance.create({
-        baseURL: 'https://api.kalasearch.cn',
+        baseURL: KALA_BASE_URL,
         headers: {
           'Content-Type': 'application/json',
           'X-Kalasearch-Id': config.appId,
@@ -23,7 +29,7 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
       })
     } else {
       this.instance = instance.create({
-        baseURL: 'https://api.kalasearch.cn',
+        baseURL: KALA_BASE_URL,
       })
     }
     this.instance.interceptors.response.use((response) => response.data)
