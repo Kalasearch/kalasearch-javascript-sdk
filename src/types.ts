@@ -14,6 +14,7 @@ export { KalaSearchApiError }
 export interface Config {
   appId: string;
   apiKey: string;
+  baseUrl?: string;
 }
 
 export interface SearchRequest {
