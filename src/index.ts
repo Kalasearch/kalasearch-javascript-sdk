@@ -12,7 +12,7 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
   }
   
   /**
-   * Search for documents into an index
+   * Search for objects from an index
    * @memberof Index
    * @method search
    */
