@@ -64,7 +64,7 @@ export type DocObject = {
   [Key in string]?: any 
 }
 
-export interface DocObjectResponse {
+export interface ObjectOperationResponse {
   processedAt: string;
   id: string;
   operation: string;
@@ -91,14 +91,14 @@ export interface IndexInterface extends KalaAxiosWrapperInterface {
   ): Promise<IndexResponse>;
   createObject(
     docObject: DocObject,
-  ): Promise<DocObjectResponse>;
+  ): Promise<ObjectOperationResponse>;
   updateObject(
-    docObject: DocObject,
     objectId: string,
-  ): Promise<DocObjectResponse>;
+    docObject: DocObject
+  ): Promise<ObjectOperationResponse>;
   deleteObject(
     objectId: string,
-  ): Promise<DocObjectResponse>;
+  ): Promise<ObjectOperationResponse>;
 }
 
 export interface KalaAxiosWrapperInterface {

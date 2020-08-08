@@ -17,8 +17,8 @@ class Kalasearch extends KalaAxiosWrapper
      * @method getIndex
      */
     getIndex(
-        id: string
-      ): Index {
+      id: string
+    ): Index {
       return new Index(this.config, id)
     }
   
@@ -38,8 +38,8 @@ class Kalasearch extends KalaAxiosWrapper
      * @method createIndex
      */
     async createIndex(
-        indexName: string
-      ): Promise<Types.IndexResponse> {
+      indexName: string
+    ): Promise<Types.IndexResponse> {
       const url = `/v1/indexes`
       return await this.post(url, { indexName })
     }
