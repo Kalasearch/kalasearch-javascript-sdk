@@ -10,7 +10,12 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
     super(config)
     this.id = id
   }
-
+  
+  /**
+   * Search for documents into an index
+   * @memberof Index
+   * @method search
+   */
   async search(
       query: string,
       options?: Types.SearchParams
@@ -36,6 +41,11 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
     )
   }
 
+  /**
+   * Update an index
+   * @memberof Index
+   * @method updateIndex
+   */
   async updateIndex(
       indexDetail: Types.IndexResponse
     ): Promise<Types.IndexResponse> {
@@ -43,6 +53,11 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
     return await this.put(url, indexDetail)
   }
 
+  /**
+   * Create an object to an index
+   * @memberof Index
+   * @method createObject
+   */
   async createObject(
     docObject: Types.DocObject,
     ): Promise<Types.DocObjectResponse> {
@@ -50,16 +65,26 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
     return await this.post(url, docObject)
   }
 
-  async editObject(
+  /**
+   * Update an object to an index
+   * @memberof Index
+   * @method updateObject
+   */
+  async updateObject(
     docObject: Types.DocObject,
-    objectId: Types.DocObjectRequest
+    objectId: string
     ): Promise<Types.DocObjectResponse> {
     const url = `/v1/indexes/${this.id}/objects/${objectId}`
     return await this.put(url, docObject)
   }
 
+  /**
+   * Delete one object from an index
+   * @memberof Index
+   * @method deleteObject
+   */
   async deleteObject(
-    objectId: Types.DocObjectRequest
+    objectId: string
     ): Promise<Types.DocObjectResponse> {
     const url = `/v1/indexes/${this.id}/objects/${objectId}`
     return await this.delete(url)

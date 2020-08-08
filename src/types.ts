@@ -47,8 +47,8 @@ export interface IndexRequest {
 export interface IndexResponse {
   id: string;
   indexName: string;
-  highlightFields: object[];
-  searchableFields: object[];
+  highlightFields: string[];
+  searchableFields: string[];
   appId: string;
   rankers: object[];
   createdAt: any;
@@ -62,10 +62,6 @@ export interface IndexListResponse {
 
 export type DocObject = { 
   [Key in string]?: any 
-}
-
-export interface DocObjectRequest {
-  objectId: string;
 }
 
 export interface DocObjectResponse {
@@ -96,12 +92,12 @@ export interface IndexInterface extends KalaAxiosWrapperInterface {
   createObject(
     docObject: DocObject,
   ): Promise<DocObjectResponse>;
-  editObject(
+  updateObject(
     docObject: DocObject,
-    objectId: DocObjectRequest,
+    objectId: string,
   ): Promise<DocObjectResponse>;
   deleteObject(
-    objectId: DocObjectRequest,
+    objectId: string,
   ): Promise<DocObjectResponse>;
 }
 
@@ -120,7 +116,12 @@ export interface KalaAxiosWrapperInterface {
 
   put<T = any, R = AxiosResponse<T>>(
     url: string,
-    data?: any,
+    data?: T,
+    config?: AxiosRequestConfig
+  ): Promise<R>;
+
+  delete<T = any, R = AxiosResponse<T>>(
+    url: string,
     config?: AxiosRequestConfig
   ): Promise<R>;
 }
