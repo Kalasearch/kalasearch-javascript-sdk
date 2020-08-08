@@ -78,6 +78,17 @@ class KalaAxiosWrapper implements Types.KalaAxiosWrapperInterface {
       throw new KalaSearchApiError(e)
     }
   }
+
+  async delete<T = any, R = AxiosResponse<T>>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<R> {
+    try {
+      return await this.instance.delete(url, config)
+    } catch(e) {
+      throw new KalaSearchApiError(e)
+    }
+  }
 }
 
 export default KalaAxiosWrapper

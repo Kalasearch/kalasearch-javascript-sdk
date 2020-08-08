@@ -43,11 +43,26 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
     return await this.put(url, indexDetail)
   }
 
-  async addDocument(
-    documents: Types.Document[]
-    ): Promise<Types.DocumentResponse> {
-    const url = `/v1/indexes/${this.id}/docs`
-    return await this.post(url, documents)
+  async createObject(
+    docObject: Types.DocObject,
+    ): Promise<Types.DocObjectResponse> {
+    const url = `/v1/indexes/${this.id}/objects`
+    return await this.post(url, docObject)
+  }
+
+  async editObject(
+    docObject: Types.DocObject,
+    objectId: Types.DocObjectRequest
+    ): Promise<Types.DocObjectResponse> {
+    const url = `/v1/indexes/${this.id}/objects/${objectId}`
+    return await this.put(url, docObject)
+  }
+
+  async deleteObject(
+    objectId: Types.DocObjectRequest
+    ): Promise<Types.DocObjectResponse> {
+    const url = `/v1/indexes/${this.id}/objects/${objectId}`
+    return await this.delete(url)
   }
 }
 

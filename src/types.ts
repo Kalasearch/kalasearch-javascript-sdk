@@ -60,12 +60,18 @@ export interface IndexListResponse {
   indexes: object[];
 }
 
-export interface Document<T = any> {
-  [attribute: string]: T
+export type DocObject = { 
+  [Key in string]?: any 
 }
 
-export interface DocumentResponse {
-  _id: string
+export interface DocObjectRequest {
+  objectId: string;
+}
+
+export interface DocObjectResponse {
+  processedAt: string;
+  id: string;
+  operation: string;
 }
 
 export interface KalaSearchInterface extends KalaAxiosWrapper {
@@ -87,9 +93,16 @@ export interface IndexInterface extends KalaAxiosWrapperInterface {
   updateIndex(
     indexDetail: IndexResponse,
   ): Promise<IndexResponse>;
-  addDocument(
-    documents: Document[],
-  ): Promise<DocumentResponse>;
+  createObject(
+    docObject: DocObject,
+  ): Promise<DocObjectResponse>;
+  editObject(
+    docObject: DocObject,
+    objectId: DocObjectRequest,
+  ): Promise<DocObjectResponse>;
+  deleteObject(
+    objectId: DocObjectRequest,
+  ): Promise<DocObjectResponse>;
 }
 
 export interface KalaAxiosWrapperInterface {
