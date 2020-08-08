@@ -10,11 +10,16 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
     super(config)
     this.id = id
   }
-
+  
+  /**
+   * Search for objects from an index
+   * @memberof Index
+   * @method search
+   */
   async search(
-      query: string,
-      options?: Types.SearchParams
-    ): Promise<Types.SearchResponse> {
+    query: string,
+    options?: Types.SearchParams
+  ): Promise<Types.SearchResponse> {
     const url = `/v1/indexes/${this.id}/query`
     const params: Types.SearchRequest = {
       query,
@@ -36,18 +41,53 @@ class Index extends KalaAxiosWrapper implements Types.IndexInterface {
     )
   }
 
+  /**
+   * Update an index
+   * @memberof Index
+   * @method updateIndex
+   */
   async updateIndex(
-      indexDetail: Types.IndexResponse
-    ): Promise<Types.IndexResponse> {
+    indexDetail: Types.IndexResponse
+  ): Promise<Types.IndexResponse> {
     const url = `/v1/indexes/${this.id}`;
     return await this.put(url, indexDetail)
   }
 
-  async addDocument(
-    documents: Types.Document[]
-    ): Promise<Types.DocumentResponse> {
-    const url = `/v1/indexes/${this.id}/docs`
-    return await this.post(url, documents)
+  /**
+   * Create an object to an index
+   * @memberof Index
+   * @method createObject
+   */
+  async createObject(
+    docObject: Types.DocObject,
+  ): Promise<Types.ObjectOperationResponse> {
+    const url = `/v1/indexes/${this.id}/objects`
+    return await this.post(url, docObject)
+  }
+
+  /**
+   * Update an object to an index
+   * @memberof Index
+   * @method updateObject
+   */
+  async updateObject(
+    objectId: string,
+    docObject: Types.DocObject
+  ): Promise<Types.ObjectOperationResponse> {
+    const url = `/v1/indexes/${this.id}/objects/${objectId}`
+    return await this.put(url, docObject)
+  }
+
+  /**
+   * Delete one object from an index
+   * @memberof Index
+   * @method deleteObject
+   */
+  async deleteObject(
+    objectId: string
+  ): Promise<Types.ObjectOperationResponse> {
+    const url = `/v1/indexes/${this.id}/objects/${objectId}`
+    return await this.delete(url)
   }
 }
 
